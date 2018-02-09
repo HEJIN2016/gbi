@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global BlockChain Index Website</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/All.css?version=2.1.1">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <style>
+        .news-content .article-list .article-item .item-area p a{
+            color: #337ab7;
+            text-decoration: underline;
+        }
+        br{
+            line-height: 0;
+        }
+
+    </style>
+    <script>
+        function setHTMLFontSize(){
+            if(document.documentElement.clientWidth < 1208){
+                document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/3.75 + 'px';
+            }
+        }
+        setHTMLFontSize();
+    </script>
+</head>
+<body>
+<a id="top"></a>
+<!--login area-->
+
+<!--login area-->
+
+<div class="login-sign-pad"></div>
+<div class="login-sign-mask">
+    <span class="shut">×</span>
+    <div class="form-container">
+        <div class="form-main-title"><span>Welcome back</span></div>
+        <div class="login-signup">
+            <form class="login-form form" id="loginForm">
+                <div class="form-group icon-input">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your phone number" id="loginPhone" autocomplete="on">
+                    <div class="error-info" id="loginPhoneErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group icon-input">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Enter your password" onpaste="return false" id="loginPass" autocomplete="new-password">
+                    <div class="error-info" id="loginErr">Sorry,Phone or password is incorrect!</div>
+                </div>
+                <button type="submit" class="btn btn-login" id="login" disabled>Login</button>
+                <div class="checkbox">
+                    <a href="javascript:;" id="signUpBtn">Register</a>
+                    <div class="forr-psd">
+                        <a href="javascript:;" id="forgetPass">Forgot Password?</a>
+                    </div>
+                </div>
+            </form>
+
+            <form class="signup-form-1 form clearfix" style="display: none" id="signUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="text" placeholder="Phone Number" id="phone" autocomplete="off">
+                    <div class="error-info" id="phoneErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn" id="get-register-code" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn">Login in</a></p>
+            </form>
+            <form class="signup-form-2 form clearfix" style="display: none">
+                <div class="form-group">
+                    <p class="v-title">Verification code</p>
+                    <!--  <input class="form-control" type="text" required id="code" autocomplete="off"> -->
+                    <div class="verify-plugin clearfix" id="code">
+                        <input type="number" class="mask-input" id="mask-input" autocomplete="off">
+                        <div id="code-1" class="inner-code"></div>
+                        <div id="code-2" class="inner-code"></div>
+                        <div id="code-3" class="inner-code"></div>
+                        <div id="code-4" class="inner-code"></div>
+                    </div>
+                    <div class="error-info" id="codeErr">errinfo</div>
+                </div>
+                <button type="button" class="btn btn-next" id="btn-next" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn1">Login in</a></p>
+            </form>
+            <form class="signup-form-3 form clearfix" style="display: none">
+                <div class="form-group sign-3">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="password" autocomplete="off">
+                    <div class="error-info" id="passwordErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group sign-32">
+                    <span class="label">Password confirmation</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="confirmPass" autocomplete="off">
+                    <div class="error-info" id="confirmPassErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn btn-next" id="register" disabled="disabled">Done</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn2">Login in</a></p>
+            </form>
+            <form class="reset-form form" style="display: none" id="resetUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your Phone Number" id="resetPhone" autocomplete="off">
+                    <div class="error-info" id="resetPhoneErr">the phone number format is incorrect!</div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group resetPassword">
+                        <span class="label">Password</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetPassword" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetPasswordErr">the phone number format is incorrect!</div>
+                    </div>
+                    <div class="form-group resetConfirmPass">
+                        <span class="label">Password confirmation</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetConfirmPass" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetConfirmPassErr">the phone number format is incorrect!</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="label">SMS Code</span>
+                    <input class="form-control codetext" type="number" placeholder="Set your SMS Code" id="resetCode" autocomplete="off">
+                    <input class="btn getcode" type="button" value="Send" id="resetGetCodeBtn">
+                    <div class="clear"></div>
+                    <div class="error-info" id="resetCodeErr">Phone identifying code format is incorrect!</div>
+                </div>
+                <button type="submit" class="btn" id="reset" disabled="disabled">Done</button>
+                <p class="trans">No account yet?<a href="javascript:;" id="signUpBtn1">Register</a></p>
+
+            </form>
+
+            <div class="reset-success" style="display: none">
+                <h3>Reset password successfully!</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content naver">
+    <div class="mobile-list">
+        <div class="phone">
+            <div class="sign-in-pad">
+                <div class="close-result">✕</div>
+                <img src="images/back/sign.png" class="sign-img">
+                <div>You've got <span class="coinAmount"></span> Nano.</div>
+            </div>
+        </div>
+        <ul>
+            <li id="close_mobile_list"><a href="javascript:"><i class="iconfont icon-left"></i>Back</a></li>
+            <li class="phoneSignUp"><a href="javascript:">Register</a></li>
+            <li class="phoneSinIn"><a href="javascript:" id="phone-login-entry">Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/option">Forecast</a></li>
+            <li><a class="" href="/coin">CoinMarket</a></li>
+            <li class="selected"><a href="/news">News</a></li>
+            <li class="phone sign-in-list">
+                <a class="sign-in">SignIn</a>
+            </li>
+            <li class="phoneLogout" style="display: none"><a href="javascript:">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <div class="phone-display-area">
+                <div class="button-area">
+                    <div class="btn mobile-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="left-logo">
+                <a href="/">
+                    <img src="images/icon/logo.png" class="logo" alt="GBI" title="Global BlockChain Index">
+                </a>
+            </div>
+            <div class="center-nav">
+                <div class="wrapper visible">
+                    <ul class="visible">
+                        <li class="">
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="sp-nav-a" href="/option">Forecast</a>
+                        </li>
+                        <li>
+                            <a class="" href="/coin">CoinMarket</a>
+                        </li>
+                        <li class="selected">
+                            <a href="/news">News</a>
+                        </li>
+                        <li><a href="javascript:" class="login-btn" id="login-entry">Login</a></li>
+                        <li class="right-area">
+                            <a href="javascript:" id="user" style="display: none" title="sign in" alt="sign in">
+                                <i class="iconfont icon-gerenzhongxinxia"></i>
+                                <div class="logout-btn">
+                                    <div class="top"></div>
+                                    <div class="logout" id="logout">logout</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="pc sign-in-list">
+                            <a class="sign-in" href="javascript:">SignIn</a>
+                            <div class="sign-in-pad">
+                                <div class="close-pad">✕</div>
+                                <img src="images/back/sign.png" class="sign-img">
+                                <div>You've got <span class="coinAmount"></span> Nano.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-area">
+                <a href="javascript:" class="btn current">USD</a>
+                <a href="javascript:" class="btn select">
+                    <div class="pre1"></div>
+                    <div class="pre2"></div>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="naver-border-bottom"></div>
+</div>
+
+<div class="news-banner">
+    <div class="container">
+        <h1>Follow the news and know more<br/> about cryptocurrency!</h1>
+    </div>
+</div>
+
+<div class="news-content">
+    <div class="loading-area">
+        <img src="images/icon/loading.gif" width="64">
+    </div>
+    <div class="news-type-list">
+        <div class="container">
+            <div class="type-list">
+                <a href="/news?type=0&page=0">News</a>
+                <a href="/news?type=1&page=0">Social Media</a>
+                <a href="/news?type=2&page=0">Offering</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="language-tab">
+            <a class="btn tab" id=""></a>
+        </div>
+        <div class="article-list">
+            <!--<div class="article-item">-->
+                <!--<article>-->
+
+                <!--</article>-->
+            <!--</div>-->
+        </div>
+        <div class="page">
+            <ul class="pagination" id="page_list">
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-up" id="scrollUp">
+    <i class="iconfont icon-shang"></i>
+</div>
+
+<footer>
+    <div class="partners container">
+        <div class="title col-lg-1 col-md-2">
+            <h3>Partners:</h3>
+        </div>
+        <div class="gbi-partners col-lg-11 col-md-10">
+            <div class="partners-list">
+                <ul>
+                    <li><a href="https://www.btcnano.org/" target="_blank" title="btcnano"><img src="images/friendsChain/btcnano.png"></a></li>
+                    <li><a href="https://big.one/" target="_blank" title="bigone"><img src="images/friendsChain/bigone.png"></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="copy-right"><div class="container">Copyright ©2018 Foxone.</div></div>
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--[if IE 9]><script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script><![endif]-->
+<script type="text/javascript" src="js/encrypt.min.js"></script>
+<script type="text/javascript" src="js/allFunction.js?version=2.1.1"></script>
+<script type="text/javascript">
+    loginJudge();
+
+    //分页函数
+    function renderPageList(page,pageNum,type){
+        page = parseInt(page);//current page num - 1
+        pageNum = parseInt(pageNum);//total page num
+        var $page_list = $("#page_list");
+        if (pageNum < 7) {
+            for (var j = 0; j < pageNum; j++) {
+                var str = '<li id=\"' + (j + 1) + '\"><a href=\"?type=' + type + '&page='+ j + '\">' + (j + 1) + '</a></li>';
+                $page_list.append(str);
+            }
+        }
+        else {
+            if(page <= 4) {
+                for (var j = 0; j < 7; j++) {
+                    var str = '<li id=\"' + (j + 1) + '\"><a href=\"?type=' + type + '&page='+ j + '\">' + (j + 1) + '</a></li>';
+                    $page_list.append(str);
+                }
+                var str = '<li class="disabled" id="more_page"><a href="javascript:" class="more">…</a></li>';
+                str += '<li id=\"' + (pageNum) + '\"><a href=\"?type=' + type + '&page=' + (pageNum - 1) + '\">' + (pageNum) + '</a></li>';
+                $page_list.append(str);
+            }else if(page > 4&&page < (pageNum - 5)){
+                var str = '<li id="1"><a href=\"?type=' + type + '&page=0">1</a></li><li class="disabled" id="more_page"><a href="javascript:" class="more">…</a></li>';
+                $page_list.append(str);
+                for(var i = page - 2;i < page + 3;i++){
+                    var str = '<li id=\"' + (i + 1) + '\"><a href=\"?type=' + type + '&page=' + i + '\">' + (i + 1) + '</a></li>';
+                    $page_list.append(str);
+                }
+                str = '<li class="disabled" id="more_page"><a href="javascript:" class="more">…</a></li><li id=\"' + pageNum + '\"><a href=\"?type=' + type + '&page=' + (pageNum - 1) + '\">' + pageNum + '</a></li>';
+                $page_list.append(str);
+            }else {
+                var str = '<li id="1"><a href=\"?type=' + type + '&page=0">1</a></li><li class="disabled" id="more_page"><a href="javascript:" class="more">…</a></li>';
+                $page_list.append(str);
+                for(var i = pageNum - 6;i < pageNum;i++){
+                    var str = '<li id=\"' + (i + 1) + '\"><a href=\"?type=' + type + '&page=' + i + '\">' + (i + 1) + '</a></li>';
+                    $page_list.append(str);
+                }
+            }
+        }
+        if (page != (pageNum - 1)) {
+            var str = '<li><a href=\"?type=' + type + '&page=' + (page + 1) + '\" id="next_page">»</a></li>';
+            $page_list.append(str);
+        }
+        if (page) {
+            var str = '<li><a href=\"?type=' + type + '&page=' + (page - 1) + '\" id="prev_page">«</a></li>';
+            $page_list.prepend(str);
+        }
+        $("#" + (page + 1)).addClass('active');
+        $(".active a").click(function(event){
+            event.preventDefault();
+        })
+    }
+    //var linkExp = new RegExp("[a-zA-z]+://[^\s]*");
+    var linkExp = new RegExp("((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\&%_\./-~-]*)?");
+    function processData(data,page,type){
+        //data = JSON.parse(data);
+        var pageNum = Math.ceil(data.total_num / 10);
+        renderPageList(page, pageNum, type);
+        if(type==0||type==2) {
+            var len = data.results.length;
+            if (!len || !data) {
+                $('#error_modal').modal('toggle');
+            }
+            else {
+                //$(".article-list,#page_list").empty();
+                for (var i = 0; i < len; i++) {
+                    var time = data.results[i].pubtime;
+                    //var time = data.results[i].pubtime * 1000;
+                    //changeTime(new Date(time))
+                    var img = 'images/news/info.png';
+                    var str = data.results[i].content;
+                   // str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+                    str = str.replace(/[ | ]*\n/g,'\n'); //去除行尾空白
+                    img = (data.results[i].picture != null) ? ( CONFIG.NEWSURL + 'mobileNewsImages' + data.results[i].picture) : img;
+                    var str = '<div class="article-item animated "><article><div class="img-area"><a href=\"\/article_' + data.results[i].id + '?' + 'type=' + type + '\"><img src=\"' + img;
+                    str += '\"></a></div><div class="item-area"><h3><a href=\"\/article_' + data.results[i].id + '?type=' + type + '\">' + data.results[i].title + '</a></h3><p class="article-content">' + clearBalank(data.results[i].content) + '</p>';
+                    str += '<p class="time">' + time + '</p></div><div class="clear"></div></article></div>';
+                    $(".article-list").append(str);
+                }
+                $(".article-list").find('br').detach();
+            }
+        }else{
+            var len = data.results.length;
+            if (!len || !data) {
+                $('#error_modal').modal('toggle');
+            }
+            else {
+                var replaceLink = 'javascript:';
+                $(".article-list,#page_list").empty();
+                var pageNum = Math.ceil(data.total_num / 10);
+                renderPageList(page, pageNum, type);
+                for (var i = 0; i < len; i++) {
+                    var time = data.results[i].createdAt;
+                    var str = '<div class="article-item animated"><article><div class="item-area" style=\"margin-left:0;\"><p class="article-content author">Author:  ' + data.results[i].screenName + '</p>';
+                    str += '<p class="time" style="bottom: 0;position: relative">' + time + '</p>' + '<h3 style="margin-bottom: 10px;"><a target="_blank" href=\"' + linkExp.exec(data.results[i].source)[0] + '\">' + data.results[i].text + '</a></h3>' +'</article></div>';
+                    $(".article-list").append(str);
+                }
+                $(".article-item").css('height', 'auto');
+            }
+        }
+    }
+
+    $(function(){
+        var page = queryParams("page")?queryParams("page"):0;
+        var type = queryParams("type")?queryParams("type"):0;
+        var genus = queryParams("genus")?queryParams("genus"):1;
+        var pageSize = 10;
+
+        //console.log(page);
+        var index = parseInt(type);
+        console.log(index);
+        $(".type-list a").eq(index).addClass('active');
+        switch (index) {
+            case 0: getNewsList(0,page,index);break;
+            case 1: getNewsList(1, page, index);break;
+            case 2: getNewsList(2,page,index);break;
+            default: getNewsList(0,page,index);break;
+        }
+    })
+
+    var $loading_area = $(".loading-area");
+
+    function getNewsList(type,page,index) {
+        $.ajax({
+            url: CONFIG.NEWSURL + "gbiNews/news/all/",
+            data: {
+                page: page,
+                type: type
+            },
+            type: "GET",
+            success: function (data) {
+                $loading_area.hide();
+                processData(data,page,index);
+            },
+            error: function () {
+                $loading_area.hide();
+                $(".article-list").empty();
+                $('#error_modal').modal('toggle');
+            }
+        })
+    }
+
+    window.onresize = function(){
+        setHTMLFontSize();
+    }
+</script>
+
+<div class="modal fade in" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 340px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Error
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="change-personal-psd" style="overflow: hidden">
+                    <img src="images/mark.png" style="width: 100px;float: left;display: block">
+                    <div style="float: right;margin-top: 31px;width: 152px;" id="content">Sorry, No data available</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Confirm
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--alert modal-->
+<div class="modal fade in" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 350px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                    Confirm
+                </h4>
+            </div>
+            <div class="modal-body" style="padding: 35px 30px;font-size: 16px;line-height: 1.8">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = location.href">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">
+                    Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+</html>

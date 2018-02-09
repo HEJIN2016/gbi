@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+	<title>Global BlockChain Index Website</title>
+	<meta name="title" content="Global BlockChain Index">
+	<meta name="keywords" content="bitcoin,BlockChain,index">
+	<meta name="description" content="Global BlockChain Index,Binary Option,Bitcoin">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/All.css?version=2.1.1">
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<style>
+		footer{
+			display: block;
+		}
+		body{
+			background-color: #fff;
+		}
+		iframe{
+			width: 100%;
+			height: 100%;
+		}
+
+	</style>
+	<script>
+		function setHTMLFontSize(){
+			if(document.documentElement.clientWidth < 1208){
+				document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/3.75 + 'px';
+			}
+		}
+		setHTMLFontSize();
+	</script>
+</head>
+<body class="first">
+<!--login area-->
+
+<div class="login-sign-pad"></div>
+<div class="login-sign-mask">
+	<span class="shut">×</span>
+	<div class="form-container">
+		<div class="form-main-title"><span>Welcome back</span></div>
+		<div class="login-signup">
+			<form class="login-form form" id="loginForm">
+				<div class="form-group icon-input">
+					<span class="label">Phone Number</span>
+					<input class="form-control" type="number" placeholder="Enter your phone number" id="loginPhone" autocomplete="on">
+					<div class="error-info" id="loginPhoneErr">the phone number format is incorrect!</div>
+				</div>
+				<div class="form-group icon-input">
+					<span class="label">Password</span>
+					<input class="form-control" type="password" placeholder="Enter your password" onpaste="return false" id="loginPass" autocomplete="new-password">
+					<div class="error-info" id="loginErr">Sorry,Phone or password is incorrect!</div>
+				</div>
+				<button type="submit" class="btn btn-login" id="login" disabled>Login</button>
+				<div class="checkbox">
+					<a href="javascript:;" id="signUpBtn">Register</a>
+					<div class="forr-psd">
+						<a href="javascript:;" id="forgetPass">Forgot Password?</a>
+					</div>
+				</div>
+			</form>
+
+			<form class="signup-form-1 form clearfix" style="display: none" id="signUpForm">
+				<div class="form-group">
+					<span class="label">Phone Number</span>
+					<input class="form-control" type="text" placeholder="Phone Number" id="phone" autocomplete="off">
+					<div class="error-info" id="phoneErr">the phone number format is incorrect!</div>
+				</div>
+				<button type="button" class="btn" id="get-register-code" disabled="disabled">Next</button>
+				<p class="trans">Already have account?<a href="javascript:;" id="loginBtn">Login in</a></p>
+			</form>
+			<form class="signup-form-2 form clearfix" style="display: none">
+				<div class="form-group">
+					<p class="v-title">Verification code</p>
+					<!--  <input class="form-control" type="text" required id="code" autocomplete="off"> -->
+					<div class="verify-plugin clearfix" id="code">
+						<input type="number" class="mask-input" id="mask-input" autocomplete="off">
+						<div id="code-1" class="inner-code"></div>
+						<div id="code-2" class="inner-code"></div>
+						<div id="code-3" class="inner-code"></div>
+						<div id="code-4" class="inner-code"></div>
+					</div>
+					<div class="error-info" id="codeErr">errinfo</div>
+				</div>
+				<button type="button" class="btn btn-next" id="btn-next" disabled="disabled">Next</button>
+				<p class="trans">Already have account?<a href="javascript:;" id="loginBtn1">Login in</a></p>
+			</form>
+			<form class="signup-form-3 form clearfix" style="display: none">
+				<div class="form-group sign-3">
+					<span class="label">Password</span>
+					<input class="form-control" type="password" placeholder="Set your password" id="password" autocomplete="off">
+					<div class="error-info" id="passwordErr">the phone number format is incorrect!</div>
+				</div>
+				<div class="form-group sign-32">
+					<span class="label">Password confirmation</span>
+					<input class="form-control" type="password" placeholder="Set your password" id="confirmPass" autocomplete="off">
+					<div class="error-info" id="confirmPassErr">the phone number format is incorrect!</div>
+				</div>
+				<button type="button" class="btn btn-next" id="register" disabled="disabled">Done</button>
+				<p class="trans">Already have account?<a href="javascript:;" id="loginBtn2">Login in</a></p>
+			</form>
+			<form class="reset-form form" style="display: none" id="resetUpForm">
+				<div class="form-group">
+					<span class="label">Phone Number</span>
+					<input class="form-control" type="number" placeholder="Enter your Phone Number" id="resetPhone" autocomplete="off">
+					<div class="error-info" id="resetPhoneErr">the phone number format is incorrect!</div>
+				</div>
+
+				<div class="clearfix">
+					<div class="form-group resetPassword">
+						<span class="label">Password</span>
+						<input class="form-control" type="password" placeholder="Set your password" id="resetPassword" onpaste="return false" autocomplete="new-password">
+						<div class="error-info" id="resetPasswordErr">the phone number format is incorrect!</div>
+					</div>
+					<div class="form-group resetConfirmPass">
+						<span class="label">Password confirmation</span>
+						<input class="form-control" type="password" placeholder="Set your password" id="resetConfirmPass" onpaste="return false" autocomplete="new-password">
+						<div class="error-info" id="resetConfirmPassErr">the phone number format is incorrect!</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<span class="label">SMS Code</span>
+					<input class="form-control codetext" type="number" placeholder="Set your SMS Code" id="resetCode" autocomplete="off">
+					<input class="btn getcode" type="button" value="Send" id="resetGetCodeBtn">
+					<div class="clear"></div>
+					<div class="error-info" id="resetCodeErr">Phone identifying code format is incorrect!</div>
+				</div>
+				<button type="submit" class="btn" id="reset" disabled="disabled">Done</button>
+				<p class="trans">No account yet?<a href="javascript:;" id="signUpBtn1">Register</a></p>
+
+			</form>
+
+			<div class="reset-success" style="display: none">
+				<h3>Reset password successfully!</h3>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content naver">
+	<div class="mobile-list">
+		<div class="phone">
+			<div class="sign-in-pad">
+				<div class="close-result">✕</div>
+				<img src="images/back/sign.png" class="sign-img">
+				<div>You've got <span class="coinAmount"></span> Nano.</div>
+			</div>
+		</div>
+		<ul>
+			<li id="close_mobile_list"><a href="javascript:"><i class="iconfont icon-left"></i>Back</a></li>
+			<li class="phoneSignUp"><a href="javascript:">Register</a></li>
+			<li class="phoneSinIn"><a href="javascript:" id="phone-login-entry">Login</a></li>
+			<li><a href="/">Home</a></li>
+			<li><a href="/option">Forecast</a></li>
+			<li class="selected"><a href="javascript:">CoinMarket</a></li>
+			<li><a href="/news">News</a></li>
+			<li class="phone sign-in-list">
+				<a class="sign-in" href="javascript:">SignIn</a>
+			</li>
+			<li class="phoneLogout" style="display: none"><a href="javascript:">Logout</a></li>
+		</ul>
+	</div>
+	<div class="container">
+		<div class="nav">
+			<div class="phone-display-area">
+				<div class="button-area">
+					<div class="btn mobile-btn">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+			</div>
+			<div class="left-logo">
+				<a href="/">
+					<img src="images/icon/logo.png" class="logo" alt="GBI" title="Global BlockChain Index">
+				</a>
+			</div>
+			<div class="center-nav">
+				<div class="wrapper visible">
+					<ul class="visible">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a class="sp-nav-a" href="/option">Forecast</a>
+						</li>
+						<li class="selected">
+							<a class="" href="javascript:">CoinMarket</a>
+						</li>
+						<li>
+							<a href="/news">News</a>
+						</li>
+						<li><a href="javascript:" class="login-btn" id="login-entry">Login</a></li>
+						<li class="right-area">
+							<a href="javascript:" id="user" style="display: none" title="sign in" alt="sign in">
+								<i class="iconfont icon-gerenzhongxinxia"></i>
+								<div class="logout-btn">
+									<div class="top"></div>
+									<div class="logout" id="logout">logout</div>
+								</div>
+							</a>
+						</li>
+						<li class="pc sign-in-list">
+							<a class="sign-in" href="javascript:">SignIn</a>
+							<div class="sign-in-pad">
+								<div class="close-pad">✕</div>
+								<img src="images/back/sign.png" class="sign-img">
+								<div>You've got <span class="coinAmount"></span> Nano.</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="right-area">
+				<a href="javascript:" class="btn current">USD</a>
+				<a href="javascript:" class="btn select">
+					<div class="pre1"></div>
+					<div class="pre2"></div>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="naver-border-bottom"></div>
+</div>
+
+<div class="top-area">
+	<div class="container banner" style="position: relative;">
+		<h1>GBI <span id="platform">App</span></h1>
+		<h2>Global BlockChain Index,unite!</h2>
+		<a href="javascript:" class="btn download-link">Download</a>
+		<div class="code-download-area">
+			<!--<p>Android</p>-->
+			<img src="images/code.png" class="code-img">
+		</div>
+		<div class="banner-word" style="display: none;"></div>
+		<div class="login-top-area" style="display: none;">
+			<form class="login-form">
+				<div class="input-area">
+					<i class="username"></i>
+				    <input class="login-input" type="text" placeholder="Username">
+				</div>
+				<div class="input-area">
+					<i class="password"></i>
+				    <input class="login-input" type="password" placeholder="Password">
+				</div>
+				<div class="input-area">
+				    <input class="btn login-btn" type="button" value="Login">
+				</div>
+				<div class="auto-login">
+					<input type="checkbox" class="auto-login" style="display: none">
+					<span class="auto-login-span" style="display: none">Auto login</span>
+					<span class="forget-pass">
+						<a href="javascript:">Forgot Pass?</a>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="select-platform">
+		<span class="iconfont icon-anzhuo" id="android"></span>
+		<span class="iconfont icon-ios" id="ios"></span>
+		<div class="line" id="split_line"></div>
+	</div>
+	<div class="after"></div>
+</div>
+
+<div class="global-data-index">
+	<div class="container">
+		<h2>GBI Index</h2>
+		<p class="title-txt">The Global BlockChain Index is a measurement of the value of</p>
+		<p class="title-txt">a section of the blockchain asset market. <a href="/number">Read More...</a></p>
+		<div class="row">
+			<div class="first-div">
+				<div class="data-index-area">
+					<div class="col-lg-12  col-md-12  right-grapth-area">
+						<!--<canvas class="GBI" id="canvas"></canvas>-->
+						<div id="GBI" class="GBI"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="play-area" style="display:none;">
+	<div class="container">
+		<h1>THE BEST BINARY OPTIONS BROKER</h1>
+		<div class="option-data-area">
+			<div class="option-data">
+				<span class="data">91%</span>
+				<div class="data-word">
+				    <span class="intro">High</span>
+				    <span class="intro">Yield</span>
+				</div>
+			</div>
+			<div class="option-data">
+				<span class="data">$1</span>
+				<div class="data-word">
+					<span class="intro">Minimum</span>
+					<span class="intro">investment</span>
+				</div>
+			</div>
+			<div class="option-data">
+				<span class="data">1min</span>
+				<div class="data-word">
+					<span class="intro">Quick</span>
+					<span class="intro">deald</span>
+				</div>
+			</div>
+			<div class="option-data">
+				<span class="data">$10</span>
+				<div class="data-word">
+					<span class="intro">Minimum</span>
+					<span class="intro">deposit</span>
+				</div>
+			</div>
+			<div class="bottom-triangle"></div>
+		</div>
+		<div class="play-btn-area">
+			<div class="square-area">
+		        <a href="javascript:" class="btn play-btn">Play</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="default-coin-table">
+	<div class="container">
+		<div class="select-option">
+			<div class="select-area hidden-xs" id="coinOptional">Optional</div>
+			<ul id="coinRecentList">
+				<li class="coin-list active">BTC</li>
+				<li class="coin-list">XRP</li>
+				<li class="coin-list">BCH</li>
+				<li class="coin-list">ETH</li>
+				<li class="coin-list">ETC</li>
+				<li class="coin-list">LTC</li>
+				
+				<li class="coin-list">ZEC</li>
+				<li class="coin-list">DASH</li>
+				<li class="coin-list">XMR</li>
+				<li class="tab-coin-list visible-xs-block">ADA</li>
+				<li class="tab-coin-list visible-xs-block">XEM</li>
+				<li class="tab-coin-list visible-xs-block">TRX</li>
+				<li class="tab-coin-list visible-xs-block">NEO</li>
+			</ul>
+			<div class="select-area more" id="moreCoin">
+				More
+				<i class="iconfont icon-shang-copy" id="iconDown"></i>
+				<i class="iconfont icon-caret-up-small" style="display: none" id="iconUp"></i>
+			</div>
+			<div class="clear"></div>
+			<div class="currency-list list-area" style="display: none;">
+				<div class="exchangeListBox">
+					<div class="top-nav" id="top_nav">
+						<span class="list-head">All</span>
+						<ul id="top_nav_list">
+							<li><a href="#NUM">1-9</a></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+					<div class="hot-list currencyList">
+						<span class="list-head hot-head">Hot</span>
+						<ul>
+							<li>BTC</li>
+							<li>ETC</li>
+							<li>ETH</li>
+							<li>LTC</li>
+							<li>BCH</li>
+							<li>ZEC</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+
+					<div id="letter_list">
+					</div>
+
+					<div class="currency-num-list currencyList" id="num_list">
+						<a id="NUM"></a>
+						<span class="list-head">1-9</span>
+						<ul class="currency_list">
+						</ul>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="coin-table" id="optionalTableDiv" style="display: none">
+			<table class="table table-hover table-bordered bitcoin-table dataTable table-responsive" id="optional_Table">
+				<thead>
+				<tr>
+					<th>coin market</th>
+					<th>Price</th>
+					<th>Gap</th>
+					<th>High(24h)</th>
+					<th>Low(24h)</th>
+					<th>Change(24h)</th>
+					<th>Volume(24h)</th>
+					<th>trend(12h)</th>
+					<th>graph</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="coin-table" id="coinTableDiv" style="display: block">
+			<table class="table table-hover table-bordered bitcoin-table dataTable table-responsive" id="currency_Table">
+				<thead>
+				<tr>
+					<th>Exchange</th>
+					<th>Time</th>
+					<th>Price</th>
+					<th>Gap</th>
+					<th>High(24h)</th>
+					<th>Low(24h)</th>
+					<th>Change(24h)</th>
+					<th>Volume(24h)</th>
+					<th>trend(12h)</th>
+					<th>graph</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="loading-area" style="display: none" id="loading_coin">
+		<img src="images/icon/loading.gif" width="64">
+	</div>
+</div>
+
+<div class="center-bg-data">
+	<div class="content-data">
+		<div class="data-tab">
+			<div class="data-title">Exchange</div>
+			<div class="data-area" id="area1"></div>
+		</div>
+		<div class="data-tab second-tab">
+			<div class="data-title">Coin</div>
+			<div class="data-area" id="area4"></div>
+		</div>
+		<div class="footer-time"></div>
+	</div>
+</div>
+
+<div class="default-coin-table">
+	<div class="container">
+		<div class="select-option">
+			<div class="select-area" id="exchangeOptional" style="display: none;">Optional</div>
+			<ul id="ExchangeRecentList">
+				<li class="active">Bitfinex</li>
+				<li>Okex</li>
+				<li>Okcoin</li>
+				<li>Binance</li>
+				<li>Bitstamp</li>
+				<li>Huobi</li>
+				<li>Bitmex</li>
+				<li>Fisco</li>
+				<li>Acx</li>
+				<li>Zaif</li>
+				<li>Poloniex</li>
+				<li>Coincheck</li>
+			</ul>
+			<div style="display:none" class="select-area more" id="moreExchangeCoin">
+				More
+				<i class="iconfont icon-shang-copy" id="iconDown2"></i>
+				<i class="iconfont icon-caret-up-small" style="display: none" id="iconUp2"></i>
+			</div>
+			<div class="clear"></div>
+			<div class="exchange-list list-area" style="display: none">
+				<div class="exchangeListBox">
+					<div class="top-nav" id="top_exchange_nav">
+						<span class="list-head">All</span>
+						<ul id="nav_list">
+							<li><a href="#NUM2">1-9</a></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+					<div class="hot-list currencyList">
+						<span class="list-head hot-head">Hot</span>
+						<ul>
+							<li>Okex</li>
+							<li>Bitfinex</li>
+							<li>Bithumb</li>
+							<li>Bitmex</li>
+							<li>Poloniex</li>
+							<li>Coincheck</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+
+					<div id="exchange_letter_list">
+					</div>
+
+					<div class="currency-num-list currencyList" id="exchange_num_list">
+						<a id="NUM2"></a>
+						<span class="list-head">1-9</span>
+						<ul class="currency_list">
+						</ul>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="coin-table" id="exchangeTableDiv">
+			<table class="table table-hover table-bordered bitcoin-table dataTable table-responsive" id="exchange_Table">
+				<thead>
+				<tr>
+					<th>Coin</th>
+					<th>Time</th>
+					<th>Price</th>
+					<!--<th>Bid</th>-->
+					<!--<th>Ask</th>-->
+					<th>High(24h)</th>
+					<th>Low(24h)</th>
+					<th>Change(24h)</th>
+					<th>Volume(24h)</th>
+					<th>Graph</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="loading-area" style="display: none" id="loading_exchange_coin">
+		<img src="images/icon/loading.gif" width="64">
+	</div>
+</div>
+
+<footer></footer>
+
+<div class="modal fade in" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+	<div class="modal-dialog" style="width: 340px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+				<h4 class="modal-title">
+					Error
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="change-personal-psd" style="overflow: hidden">
+					<img src="images/mark.png" style="width: 100px;float: left;display: block">
+					<div style="float: right;margin-top: 31px;width: 152px;" id="content">Sorry, No data available</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location = window.location">
+					Reload
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<div class="modal fade in" id="select_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  style="top: 0;margin-top: 0">
+	<div class="modal-dialog" style="width: 1040px;overflow: auto;margin-top: 5%;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="iconfont icon-cha"></i></button>
+				<h4 class="modal-title">
+					Optional Manage
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="login-judge">
+					<p>You are not logged in. Please <a href="javascript:" id="login_btn">login</a> or <a href="javascript:" id="sign_up">register</a></p>
+				</div>
+				<div class="select-market">
+					<ul class="select-market-list">
+
+					</ul>
+				</div>
+				<div class="tab-coin">
+					<div class="tab-coin-list BTC">
+						<span id="BTC">BTC</span>
+						<hr>
+						<a href="javascript:" class="collapse-handler active">
+							<i class="iconfont icon-shang-copy"></i>
+							<i class="iconfont icon-caret-up-small"></i>
+						</a>
+						<ul class="list">
+							<li class="">
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitmex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitfinex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Fisco</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Zaif</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Okex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Binance</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Coincheck</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitstamp</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Poloniex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Huobi</a>
+							</li>
+						</ul>
+					</div>
+					<div class="tab-coin-list ETH">
+						<span id="ETH">ETH</span>
+						<hr>
+						<a href="javascript:" class="collapse-handler">
+							<i class="iconfont icon-shang-copy"></i>
+							<i class="iconfont icon-caret-up-small"></i>
+						</a>
+						<ul class="list">
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitfinex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Binance</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Zaif</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Okex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Poloniex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Huobi</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="tab-coin-list BCH">
+						<span id="BCH">BCH</span>
+						<hr>
+						<a href="javascript:" class="collapse-handler">
+							<i class="iconfont icon-shang-copy"></i>
+							<i class="iconfont icon-caret-up-small"></i>
+						</a>
+						<ul class="list">
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitfinex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Fisco</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Zaif</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Okex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Poloniex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Huobi</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="tab-coin-list ETC">
+						<span id="ETC">ETC</span>
+						<hr>
+						<a href="javascript:" class="collapse-handler">
+							<i class="iconfont icon-shang-copy"></i>
+							<i class="iconfont icon-caret-up-small"></i>
+						</a>
+						<ul class="list">
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitfinex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Okex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Poloniex</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="tab-coin-list LTC">
+						<span id="LTC">LTC</span>
+						<hr>
+						<a href="javascript:" class="collapse-handler">
+							<i class="iconfont icon-shang-copy"></i>
+							<i class="iconfont icon-caret-up-small"></i>
+						</a>
+						<ul class="list">
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitfinex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Okex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Bitstamp</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Binance</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Poloniex</a>
+							</li>
+							<li>
+								<i class="iconfont icon-jia1"></i>
+								<i class="iconfont icon-103"></i>
+								<a href="javascript:" class="exchange-name">Huobi</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="save" data-dismiss="modal">Save</button>
+				<button type="button" class="btn btn-default" id="empty">Empty</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<div class="scroll-up" id="scrollUp">
+	<i class="iconfont icon-shang"></i>
+</div>
+
+<footer>
+	<div class="partners container">
+		<div class="title col-lg-1 col-md-2">
+			<h3>Partners:</h3>
+		</div>
+		<div class="gbi-partners col-lg-11 col-md-10">
+			<div class="partners-list">
+				<ul>
+					<li><a href="https://www.btcnano.org/" target="_blank" title="btcnano"><img src="images/friendsChain/btcnano.png"></a></li>
+					<li><a href="https://big.one/" target="_blank" title="bigone"><img src="images/friendsChain/bigone.png"></a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="copy-right"><div class="container">Copyright ©2018 Foxone.</div></div>
+</footer>
+<!--alert modal-->
+<div class="modal fade in" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+	<div class="modal-dialog" style="width: 350px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					✕
+				</button>
+				<h4 class="modal-title">
+					Confirm
+				</h4>
+			</div>
+			<div class="modal-body" style="padding: 35px 30px;font-size: 16px;line-height: 1.8">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = location.href">
+					Reload
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">
+					Cancel
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE 9]><script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script><![endif]-->
+<script type="text/javascript" src="js/encrypt.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/allFunction.js?version=2.1.2"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script>
+	//下载按钮
+	var u = navigator.userAgent;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+	if(isAndroid) {
+		$(".download-link").get(0).href ="https://www.mtum.com/apk/android-gbi.apk";
+	} else if(isiOS) {
+		$(".download-link").get(0).href ="https://itunes.apple.com/cn/app/gbi/id1329369273?mt=8";
+	}else {
+		$(".download-link").click(function(event){
+			$(".code-download-area").show();
+			event.stopPropagation();
+		})
+	}
+	$(document).click(function(){
+		$(".code-download-area,.search-area").hide();
+	})
+</script>
+<script type="text/javascript" src="js/coin.js"></script>
+</body>
+</html>

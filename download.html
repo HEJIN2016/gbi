@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global BlockChain Index</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <style type="text/css">
+        a.download-link {
+            display: block;
+            margin: 32px auto;
+            width: 180px;
+            height: 58px;
+            background: #2da4ff;
+            padding: 0;
+            line-height: 56px;
+            color: #fff;
+            font-size: 22px;
+            text-align: center; 
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<a href="https://www.mtum.com/apk/gbi.apk" id="link" class="download-link">Download</a>
+<script>
+    var elem = document.getElementById("link");
+    var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    if(isAndroid)
+        {
+            window.location.href ="https://www.mtum.com/apk/gbi.apk";
+            elem.href ="https://www.mtum.com/apk/gbi.apk";
+        }
+        else if(isiOS)
+        {
+            window.location.href ="https://itunes.apple.com/cn/app/gbi/id1329369273?mt=8";
+            elem.href ="https://itunes.apple.com/cn/app/gbi/id1329369273?mt=8";
+        } else{
+            window.location.href ="https://www.mtum.com/apk/gbi.apk";
+        }
+</script>
+
+</body>
+</html>

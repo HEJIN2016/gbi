@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Global BlockChain Index Website</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/All.css?version=2.1.1">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <style>
+        br{
+            line-height: 1;
+        }
+        .news-content {
+            min-height: 80px;
+        }
+        .loading-area {
+            top: 50%;
+            margin-top: -32px;
+        }
+    </style>
+    <script>
+        function setHTMLFontSize(){
+            if(document.documentElement.clientWidth < 1208){
+                document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/3.75 + 'px';
+            }
+        }
+        setHTMLFontSize();
+    </script>
+</head>
+<body>
+<a id="top"></a>
+
+<!--login area-->
+
+<div class="login-sign-pad"></div>
+<div class="login-sign-mask">
+    <span class="shut">×</span>
+    <div class="form-container">
+        <div class="form-main-title"><span>Welcome back</span></div>
+        <div class="login-signup">
+            <form class="login-form form" id="loginForm">
+                <div class="form-group icon-input">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your phone number" id="loginPhone" autocomplete="on">
+                    <div class="error-info" id="loginPhoneErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group icon-input">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Enter your password" onpaste="return false" id="loginPass" autocomplete="new-password">
+                    <div class="error-info" id="loginErr">Sorry,Phone or password is incorrect!</div>
+                </div>
+                <button type="submit" class="btn btn-login" id="login" disabled>Login</button>
+                <div class="checkbox">
+                    <a href="javascript:;" id="signUpBtn">Register</a>
+                    <div class="forr-psd">
+                        <a href="javascript:;" id="forgetPass">Forgot Password?</a>
+                    </div>
+                </div>
+            </form>
+
+            <form class="signup-form-1 form clearfix" style="display: none" id="signUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="text" placeholder="Phone Number" id="phone" autocomplete="off">
+                    <div class="error-info" id="phoneErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn" id="get-register-code" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn">Login in</a></p>
+            </form>
+            <form class="signup-form-2 form clearfix" style="display: none">
+                <div class="form-group">
+                    <p class="v-title">Verification code</p>
+                    <!--  <input class="form-control" type="text" required id="code" autocomplete="off"> -->
+                    <div class="verify-plugin clearfix" id="code">
+                        <input type="number" class="mask-input" id="mask-input" autocomplete="off">
+                        <div id="code-1" class="inner-code"></div>
+                        <div id="code-2" class="inner-code"></div>
+                        <div id="code-3" class="inner-code"></div>
+                        <div id="code-4" class="inner-code"></div>
+                    </div>
+                    <div class="error-info" id="codeErr">errinfo</div>
+                </div>
+                <button type="button" class="btn btn-next" id="btn-next" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn1">Login in</a></p>
+            </form>
+            <form class="signup-form-3 form clearfix" style="display: none">
+                <div class="form-group sign-3">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="password" autocomplete="off">
+                    <div class="error-info" id="passwordErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group sign-32">
+                    <span class="label">Password confirmation</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="confirmPass" autocomplete="off">
+                    <div class="error-info" id="confirmPassErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn btn-next" id="register" disabled="disabled">Done</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn2">Login in</a></p>
+            </form>
+            <form class="reset-form form" style="display: none" id="resetUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your Phone Number" id="resetPhone" autocomplete="off">
+                    <div class="error-info" id="resetPhoneErr">the phone number format is incorrect!</div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group resetPassword">
+                        <span class="label">Password</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetPassword" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetPasswordErr">the phone number format is incorrect!</div>
+                    </div>
+                    <div class="form-group resetConfirmPass">
+                        <span class="label">Password confirmation</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetConfirmPass" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetConfirmPassErr">the phone number format is incorrect!</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="label">SMS Code</span>
+                    <input class="form-control codetext" type="number" placeholder="Set your SMS Code" id="resetCode" autocomplete="off">
+                    <input class="btn getcode" type="button" value="Send" id="resetGetCodeBtn">
+                    <div class="clear"></div>
+                    <div class="error-info" id="resetCodeErr">Phone identifying code format is incorrect!</div>
+                </div>
+                <button type="submit" class="btn" id="reset" disabled="disabled">Done</button>
+                <p class="trans">No account yet?<a href="javascript:;" id="signUpBtn1">Register</a></p>
+
+            </form>
+
+            <div class="reset-success" style="display: none">
+                <h3>Reset password successfully!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content naver">
+    <div class="mobile-list">
+        <div class="phone">
+            <div class="sign-in-pad">
+                <div class="close-result">✕</div>
+                <img src="images/back/sign.png" class="sign-img">
+                <div>You've got <span class="coinAmount"></span> Nano.</div>
+            </div>
+        </div>
+        <ul>
+            <li id="close_mobile_list"><a href="javascript:"><i class="iconfont icon-left"></i>Back</a></li>
+            <li class="phoneSignUp"><a href="javascript:">Register</a></li>
+            <li class="phoneSinIn"><a href="javascript:" id="phone-login-entry">Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/option">Forecast</a></li>
+            <li><a class="" href="/coin">CoinMarket</a></li>
+            <li class="selected"><a href="/news">News</a></li>
+            <li class="phone sign-in-list">
+                <a class="sign-in" href="javascript:">SignIn</a>
+            </li>
+            <li class="phoneLogout" style="display: none"><a href="javascript:">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <div class="phone-display-area">
+                <div class="button-area">
+                    <div class="btn mobile-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="left-logo">
+                <a href="/">
+                    <img src="images/icon/logo.png" class="logo" alt="GBI" title="Global BlockChain Index">
+                </a>
+            </div>
+            <div class="center-nav">
+                <div class="wrapper visible">
+                    <ul class="visible">
+                        <li class="">
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="sp-nav-a" href="/option">Forecast</a>
+                        </li>
+                        <li>
+                            <a class="" href="/coin">CoinMarket</a>
+                        </li>
+                        <li class="selected">
+                            <a href="/news">News</a>
+                        </li>
+                        <li><a href="javascript:" class="login-btn" id="login-entry">Login</a></li>
+                        <li class="right-area">
+                            <a href="javascript:" id="user" style="display: none" title="sign in" alt="sign in">
+                                <i class="iconfont icon-gerenzhongxinxia"></i>
+                                <div class="logout-btn">
+                                    <div class="top"></div>
+                                    <div class="logout" id="logout">logout</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="pc sign-in-list">
+                            <a class="sign-in" href="javascript:">SignIn</a>
+                            <div class="sign-in-pad">
+                                <div class="close-pad">✕</div>
+                                <img src="images/back/sign.png" class="sign-img">
+                                <div>You've got <span class="coinAmount"></span> Nano.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-area">
+                <a href="javascript:" class="btn current">USD</a>
+                <a href="javascript:" class="btn select">
+                    <div class="pre1"></div>
+                    <div class="pre2"></div>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="naver-border-bottom"></div>
+</div>
+
+<div class="news-banner">
+    <div class="container">
+        <h1>Keep an eye on the news and learn<br/>about Bitcoin!</h1>
+    </div>
+</div>
+
+<div class="news-content">
+    <div class="news-type-list">
+        <div class="container">
+            <div class="type-list">
+                    <a href="/news?type=0&page=0">News</a>
+                    <a href="/news?type=1&page=0">Social Media</a>
+                    <a href="/news?type=2&page=0">Offering</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<div class="news-details">
+    <div class="loading-area">
+        <img src="images/icon/loading.gif" width="64">
+    </div>
+    <div class="container">
+        <article>
+            <header>
+                <h3></h3>
+                <span class="time"></span>
+                <a href="" class="author" target="_blank"></a>
+            </header>
+
+            <section>
+                <p>
+
+                </p>
+            </section>
+        </article>
+    </div>
+</div>
+
+<div class="scroll-up" id="scrollUp">
+    <i class="iconfont icon-shang"></i>
+</div>
+
+<div class="container">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjk5OS85NTYx">
+        <script type="text/javascript">
+            (function(d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+
+                if (typeof LivereTower === 'function') { return; }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用网站功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+
+<footer>
+    <div class="partners container">
+        <div class="title col-lg-1 col-md-2">
+            <h3>Partners:</h3>
+        </div>
+        <div class="gbi-partners col-lg-11 col-md-10">
+            <div class="partners-list">
+                <ul>
+                    <li><a href="https://www.btcnano.org/" target="_blank" title="btcnano"><img src="images/friendsChain/btcnano.png"></a></li>
+                    <li><a href="https://big.one/" target="_blank" title="bigone"><img src="images/friendsChain/bigone.png"></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="copy-right"><div class="container">Copyright ©2018 Foxone.</div></div>
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--[if IE 9]><script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script><![endif]-->
+<script type="text/javascript" src="js/encrypt.min.js"></script>
+<script type="text/javascript" src="js/allFunction.js?version=2.1.1"></script>
+<script type="text/javascript">
+    window.onresize = function(){
+        setHTMLFontSize();
+    }
+    loginJudge();
+
+    var id = queryParams('id')||0;
+    try{
+        id = location.href.split('_')[1].split('?')[0];
+    } catch(err){}
+    var type = queryParams('type')||0;
+    $(".loading-area").show();
+
+    $(".type-list a").eq(type).addClass('active');
+    $.ajax({
+        url: CONFIG.NEWSURL + 'gbiNews/news/detail/',
+        type: 'GET',
+        data: {
+            id: id,
+            type: type
+        },
+        success: function(data){
+            $(".loading-area").hide();
+            if(!data){
+                $('#error_modal').modal('toggle');
+            }else {
+                //data = JSON.parse(data);
+                //console.log (changeTime(new Date(data[0].pubtime * 1000)));
+                $("header h3").html(data.results.title);
+                $(".author").attr("href",data.results.site).html(data.results.site_name);
+                $("section p").html(clearBalank(data.results.content));
+                //$("section p").append(data.results.content);
+                if(data.results.picture){
+                    var img = new Image();
+                    img.src =  CONFIG.NEWSURL + 'mobileNewsImages' + data.results.picture;
+                    $("section").prepend(img).css('text-align','center');
+                }
+                $(".time").html(data.results.pubtime);
+                //$(".time").html(changeTime(new Date(data[0].pubtime * 1000)));
+            }
+        },
+        error: function(){
+            $('#error_modal').modal('toggle');
+        }
+    })
+
+</script>
+
+<div class="modal fade in" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 340px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Error
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="change-personal-psd" style="overflow: hidden">
+                    <img src="images/mark.png" style="width: 100px;float: left;display: block">
+                    <div style="float: right;margin-top: 31px;width: 152px;" id="content">Sorry, No data available</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Confirm
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--alert modal-->
+<div class="modal fade in" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 350px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                    Confirm
+                </h4>
+            </div>
+            <div class="modal-body" style="padding: 35px 30px;font-size: 16px;line-height: 1.8">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = location.href">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">
+                    Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <title>Global BlockChain Index Website</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/All.css?version=2.1.1">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <style>
+        footer{
+            display: block;
+        }
+        .naver {
+            background: #fff;
+        }
+        .call-area, .put-area {
+            width: 100%;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .add-reduce {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .option-trade-area .option-amount .amount-area .amount-title {
+            margin-bottom: 10px;
+        }
+        .list-area {
+            display: block;
+        }
+        .pagination>li>a, .pagination>li>span {
+            margin: 0;
+        }
+        .page .pagination li.disabled a.more {
+            padding: 10px 0;
+            line-height: 1.42;
+            font-weight: 700;
+        }
+        @media screen and (max-width: 767px) {
+            .call-area, .put-area {
+                width: 100%;
+                margin-top: 0.05rem;
+            }
+        }
+
+    </style>
+    <script>
+        //rem
+        function setHTMLFontSize(){
+            if(document.documentElement.clientWidth < 1208){
+                document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/3.75 + 'px';
+            }
+        }
+        setHTMLFontSize();
+    </script>
+</head>
+<body>
+
+<!--login area-->
+
+<div class="login-sign-pad"></div>
+<div class="login-sign-mask">
+    <span class="shut">×</span>
+    <div class="form-container">
+        <div class="form-main-title"><span>Welcome back</span></div>
+        <div class="login-signup">
+            <form class="login-form form" id="loginForm">
+                <div class="form-group icon-input">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your phone number" id="loginPhone" autocomplete="on">
+                    <div class="error-info" id="loginPhoneErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group icon-input">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Enter your password" onpaste="return false" id="loginPass" autocomplete="new-password">
+                    <div class="error-info" id="loginErr">Sorry,Phone or password is incorrect!</div>
+                </div>
+                <button type="submit" class="btn btn-login" id="login" disabled>Login</button>
+                <div class="checkbox">
+                    <a href="javascript:;" id="signUpBtn">Register</a>
+                    <div class="forr-psd">
+                        <a href="javascript:;" id="forgetPass">Forgot Password?</a>
+                    </div>
+                </div>
+            </form>
+
+            <form class="signup-form-1 form clearfix" style="display: none" id="signUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="text" placeholder="Phone Number" id="phone" autocomplete="off">
+                    <div class="error-info" id="phoneErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn" id="get-register-code" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn">Login in</a></p>
+            </form>
+            <form class="signup-form-2 form clearfix" style="display: none">
+                <div class="form-group">
+                    <p class="v-title">Verification code</p>
+                    <!--  <input class="form-control" type="text" required id="code" autocomplete="off"> -->
+                    <div class="verify-plugin clearfix" id="code">
+                        <input type="number" class="mask-input" id="mask-input" autocomplete="off">
+                        <div id="code-1" class="inner-code"></div>
+                        <div id="code-2" class="inner-code"></div>
+                        <div id="code-3" class="inner-code"></div>
+                        <div id="code-4" class="inner-code"></div>
+                    </div>
+                    <div class="error-info" id="codeErr">errinfo</div>
+                </div>
+                <button type="button" class="btn btn-next" id="btn-next" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn1">Login in</a></p>
+            </form>
+            <form class="signup-form-3 form clearfix" style="display: none">
+                <div class="form-group sign-3">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="password" autocomplete="off">
+                    <div class="error-info" id="passwordErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group sign-32">
+                    <span class="label">Password confirmation</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="confirmPass" autocomplete="off">
+                    <div class="error-info" id="confirmPassErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn btn-next" id="register" disabled="disabled">Done</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn2">Login in</a></p>
+            </form>
+            <form class="reset-form form" style="display: none" id="resetUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your Phone Number" id="resetPhone" autocomplete="off">
+                    <div class="error-info" id="resetPhoneErr">the phone number format is incorrect!</div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group resetPassword">
+                        <span class="label">Password</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetPassword" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetPasswordErr">the phone number format is incorrect!</div>
+                    </div>
+                    <div class="form-group resetConfirmPass">
+                        <span class="label">Password confirmation</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetConfirmPass" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetConfirmPassErr">the phone number format is incorrect!</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="label">SMS Code</span>
+                    <input class="form-control codetext" type="number" placeholder="Set your SMS Code" id="resetCode" autocomplete="off">
+                    <input class="btn getcode" type="button" value="Send" id="resetGetCodeBtn">
+                    <div class="clear"></div>
+                    <div class="error-info" id="resetCodeErr">Phone identifying code format is incorrect!</div>
+                </div>
+                <button type="submit" class="btn" id="reset" disabled="disabled">Done</button>
+                <p class="trans">No account yet?<a href="javascript:;" id="signUpBtn1">Register</a></p>
+
+            </form>
+
+            <div class="reset-success" style="display: none">
+                <h3>Reset password successfully!</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content naver">
+    <div class="mobile-list">
+        <div class="phone">
+            <div class="sign-in-pad">
+                <div class="close-result">✕</div>
+                <img src="images/back/sign.png" class="sign-img">
+                <div>You've got <span class="coinAmount"></span> Nano.</div>
+            </div>
+        </div>
+        <ul>
+            <li id="close_mobile_list"><a href="javascript:"><i class="iconfont icon-left"></i>Back</a></li>
+            <li class="phoneSignUp"><a href="javascript:">Register</a></li>
+            <li class="phoneSinIn"><a href="javascript:" id="phone-login-entry">Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li class="selected"><a href="/option">Forecast</a></li>
+            <li><a class="" href="/coin">CoinMarket</a></li>
+            <li><a href="/news">News</a></li>
+            <li class="phone sign-in-list">
+                <a class="sign-in">SignIn</a>
+            </li>
+            <li class="phoneLogout" style="display: none"><a href="javascript:">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <div class="phone-display-area">
+                <div class="button-area">
+                    <div class="btn mobile-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="left-logo">
+                <a href="/">
+                    <img src="images/icon/logo.png" class="logo" alt="GBI" title="Global BlockChain Index">
+                </a>
+            </div>
+            <div class="center-nav">
+                <div class="wrapper visible">
+                    <ul class="visible">
+                        <li class="">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="selected">
+                            <a class="sp-nav-a" href="/option">Forecast</a>
+                        </li>
+                        <li>
+                            <a class="" href="/coin">CoinMarket</a>
+                        </li>
+                        <li>
+                            <a href="/news">News</a>
+                        </li>
+                        <li><a href="javascript:" class="login-btn" id="login-entry">Login</a></li>
+                        <li class="right-area">
+                            <a href="javascript:" id="user" style="display: none" title="sign in" alt="sign in">
+                                <i class="iconfont icon-gerenzhongxinxia"></i>
+                                <div class="logout-btn">
+                                    <div class="top"></div>
+                                    <div class="logout" id="logout">logout</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="pc sign-in-list">
+                            <a class="sign-in">SignIn</a>
+                            <div class="sign-in-pad">
+                                <div class="close-pad">✕</div>
+                                <img src="images/back/sign.png" class="sign-img">
+                                <div>You've got <span class="coinAmount"></span> Nano.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-area">
+                <a href="javascript:" class="btn current">USD</a>
+                <a href="javascript:" class="btn select">
+                    <div class="pre1"></div>
+                    <div class="pre2"></div>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="naver-border-bottom"></div>
+</div>
+
+<div class="option-top-area">
+    <div class="container">
+        <h1>The Best Binary Options Broker</h1>
+    </div>
+
+    <div class="play-area">
+        <div class="container">
+            <div class="option-data-area">
+                <div class="option-data">
+                    <span class="data">0</span>
+                    <div class="data-word">
+                        <span class="intro">Market</span>
+                        <span class="intro">maker</span>
+                    </div>
+                </div>
+                <div class="option-data">
+                    <span class="data">Nano 0.01</span>
+                    <div class="data-word coin-word">
+                        <span class="intro">Min</span>
+                        <span class="intro">investment</span>
+                    </div>
+                </div>
+                <div class="option-data">
+                    <span class="data">60s</span>
+                    <div class="data-word">
+                        <span class="intro">Quick</span>
+                        <span class="intro">deals</span>
+                    </div>
+                </div>
+                <div class="option-data">
+                    <span class="data">100%</span>
+                    <div class="data-word">
+                        <span class="intro">Fair</span>
+                        <span class="intro">play</span>
+                    </div>
+                </div>
+                <div class="bottom-triangle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="option-trade-area">
+    <div class="container">
+        <div class="option-box">
+            <div class="result" id="result">
+                <div class="result-info">
+                    <div class="close-result">✕</div>
+                    <h2 id="resultTitle">Good prediction</h2>
+                    <p>Try on practice account with real charts!</p>
+                    <div class="btn-area">
+                        <div class="btn btn-again">Try Again now!</div>
+                        <div class="btn btn-result win-result">
+                            <div class="left-result">
+                                <div class="profit">Profit</div>
+                                <span>Nano&nbsp;</span>
+                                <span class="balance">512.01</span>
+                            </div>
+                            <i class="result-icon"></i>
+                        </div>
+                        <div class="btn btn-result lose-result" style="display: none">
+                            <div class="left-result">
+                                <div>Profit</div>
+                                <span>Nano&nbsp;</span>
+                                <span class="balance">0</span>
+                            </div>
+                            <i class="result-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="option-title">
+                <div class="option-type">
+                    <div class="option-index">GBI Index</div>
+                    <div class="option-rose">Chg: <span id="rose">0.00</span>%</div>
+                </div>
+                <div class="option-user-account">
+                    <span class="account">
+                        <div class="btn-account">
+                            <span class="user-option-info">Nano</span>
+                            <span id="account">0.00</span>
+                        </div>
+                        <div class="practice-account">Account</div>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 option-graph">
+                <div id="option"></div>
+                <p>Profit calculated based on historical price movement data. Past performance is not an indication of future results.</p>
+                <div class="game-result">
+                    <div class="highter-total"></div>
+                    <div class="lowter-total"></div>
+                    <div class="clear"></div>
+                    <div class="game-data">
+                        <div class="left-highter-data">
+                            <span class="game-title">Highter</span>
+                            <span class="game-num" id="swellMoney">0</span>
+                            <span class="game-odds">(1 → <span id="swellOdds">1</span> )</span>
+                        </div>
+                        <div class="center-VS">VS</div>
+                        <div class="right-Lower-data">
+                            <span class="game-num" id="tumbleMoney">0</span>
+                            <span class="game-odds">(1 → <span id="tumbleOdds">1</span> )</span>
+                            <span class="game-title">Lower</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 option-amount">
+                <div class="error-amount" id="errorAmount">Please enter a valid amount!</div>
+                <div class="amount-area unit-amount">
+                    <span class="amount-title">Amount</span>
+                    <div class="input-area">
+                        <span class="unit" style="display: none">฿</span>
+                        <input type="text" class="amount" id="amount" value="1.00" onkeyup="value=value.replace(/[^\d.]/g,'')">
+                    </div>
+                </div>
+                <div class="add-reduce">
+                    <div class="add-area btn"></div>
+                    <div class="reduce-area btn"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="option-compare" style="display: none;">
+                    <p>Profit:&nbsp;&nbsp;<span class="option-chg" id="profit">110%</span></p>
+                    <span class="option-gap" id="winResult">+11.00</span>
+                </div>
+                <div class="select-call-area call-area">
+                    <div class="btn btn-call">
+                        <i class="iconfont icon-gupiaozhang"></i>
+                        <span class="word">Higher</span>
+                    </div>
+                    <div class="btn btn-put">
+                        <i class="iconfont icon-gupiaodie"></i>
+                        <span class="word">Lower</span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <!--<div class="login-judge-area">-->
+                    <!--<p>You are not logged in. <br>Please-->
+                        <!--<a href="login.html">login</a>-->
+                        <!--or-->
+                        <!--<a href="login.html?action=signup">register</a>-->
+                    <!--</p>-->
+                <!--</div>-->
+                <div class="pause-trade-area">
+                    <p>Under expiration, <br>please wait...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="history-list">
+    <div class="container">
+        <h3>Trading History</h3>
+        <div class="history-btn" style="display: none">
+            <div class="btn my-history selected">Me</div>
+            <div class="btn all-history">Amount</div>
+        </div>
+        <div class="list-table">
+            <div class="loading-area" style="" id="loading_coin">
+                <img src="images/icon/loading.gif" width="64">
+            </div>
+            <div class="list-area">
+                <div class="table-area">
+                    <table class="table table-striped table-hover table-responsive" id="historyTrade">
+                        <thead>
+                            <tr>
+                                <th>Period No.</th>
+                                <th>Start Time</th>
+                                <th>Result</th>
+                                <th>Deal Money</th>
+                                <th>Winer Money</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <div class="login-judge">
+                        <p>You are not logged in. Please
+                            <a href="javascript:" id="loginButton">login</a> or
+                            <a href="javascript:" id="signUpButton">register</a>
+                        </p>
+                    </div>
+
+                    <div class="page">
+                        <ul class="pagination" id="tradeHistoryPage">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="error-info">Get history trade failed,please try again!</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-up" id="scrollUp">
+    <i class="iconfont icon-shang"></i>
+</div>
+
+<footer>
+    <div class="partners container">
+        <div class="title col-lg-1 col-md-2">
+            <h3>Partners:</h3>
+        </div>
+        <div class="gbi-partners col-lg-11 col-md-10">
+            <div class="partners-list">
+                <ul>
+                    <li><a href="https://www.btcnano.org/" target="_blank" title="btcnano"><img src="images/friendsChain/btcnano.png"></a></li>
+                    <li><a href="https://big.one/" target="_blank" title="bigone"><img src="images/friendsChain/bigone.png"></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="copy-right"><div class="container">Copyright ©2018 Foxone.</div></div>
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE 9]>
+<script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script>
+<script type="text/javascript" src="js/sockjs.js"></script>
+<![endif]-->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/encrypt.min.js"></script>
+<script type="text/javascript" src="js/stomp.js"></script>
+<script type="text/javascript" src="js/allFunction.js?version=2.1.1"></script>
+<script type="text/javascript" src="js/game.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var state = loginJudge();
+        if (!state) {
+            $(".login-judge").show();
+            $("#loading_coin").hide();
+            $("#loginButton").click(function () {
+                loginEvent();
+            })
+            $("#signUpButton").click(function () {
+                loginEvent();
+                signUp();
+            })
+        } else {
+            $(".login-judge").hide();
+            loginUser.setBalance(CookieUtil.getCookie('balance'));
+            console.log(parseFloat(loginUser.getBalance()).toFixed(2));
+            $account.text(parseFloat(loginUser.getBalance()).toFixed(2));
+            loginUser.getBettingHistory();
+        }
+
+        //开始二元期权游戏
+        optionGame.init();
+
+        //交易历史记录分页查询
+        $("html").on('click', '#tradeHistoryPage li a', function (event) {
+            if (!loginJudge()) {
+                alert('Sorry,You are not currently logged in. Please login first and continue the operation');
+                return false;
+            }
+            if ($(this).parent('li').hasClass('active')) {
+                return false;
+            } else if ($(this).parent('li').hasClass('disabled')) {
+                return false;
+            } else {
+                $("#loading_coin").show();
+                loginUser.getBettingHistory($(this).attr("data-page"));
+            }
+        })
+        $("#logout,.phoneLogout").click(function () {
+            logout();
+            loginJudge();
+            logout();
+            $(".login-judge-area").show();
+            $("#loading_coin").hide();
+            $("#historyTrade thead").empty();
+            try {
+                if (loginUser) {
+                    loginUser = null;
+                    $account.text('0.00');
+                }
+            } catch (err) {
+
+            }
+        });
+    });
+</script>
+
+<div class="modal fade in" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 360px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                    Error
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="change-personal-psd" style="overflow: hidden">
+                    <img src="images/mark.png" style="width: 100px;float: left;display: block">
+                    <div style="float: right;margin-top: 31px;width: 152px;" id="content">Sorry, No data available</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location = window.location"  style="border-radius: 4px">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"  style="border-radius: 4px">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade in" id="trade_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 350px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                    Confirm
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="change-personal-psd" style="overflow: hidden">
+                    <div style="font-size: 18px;padding: 30px 0">You are about to bet Nano <span id="tradeMoney"></span>, OK?</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"  id="confirmTrade">
+                    Confirm
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!--alert modal-->
+<div class="modal fade in" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 350px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                   Confirm
+                </h4>
+            </div>
+            <div class="modal-body" style="padding: 35px 30px;font-size: 16px;line-height: 1.8">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = location.href">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">
+                    Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+</html>

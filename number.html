@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <title>Global BlockChain Index Website</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+    <link rel="stylesheet" type="text/css" href="fonts/iconfont.css">
+    <link rel="stylesheet" href="css/animate.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/All.css?version=2.1.1">
+    <!--<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800">-->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <style>
+        footer{
+            display: block;
+        }
+        .naver {
+            background: transparent;
+        }
+        @media screen and (max-width: 767px) {
+            .option-trade-area {
+                padding: 0;
+                margin-top: 60px;
+            }
+            .add-reduce > div, .select-call-area > div {
+                margin-top: 0.3rem;
+            }
+        }
+    </style>
+    <script>
+        function setHTMLFontSize(){
+            if(document.documentElement.clientWidth < 1208){
+                document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/3.75 + 'px';
+            }
+        }
+        setHTMLFontSize();
+        window.onresize = setHTMLFontSize;
+    </script>
+</head>
+<body>
+
+<!--login area-->
+
+<div class="login-sign-pad"></div>
+<div class="login-sign-mask">
+    <span class="shut">×</span>
+    <div class="form-container">
+        <div class="form-main-title"><span>Welcome back</span></div>
+        <div class="login-signup">
+            <form class="login-form form" id="loginForm">
+                <div class="form-group icon-input">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your phone number" id="loginPhone" autocomplete="on">
+                    <div class="error-info" id="loginPhoneErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group icon-input">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Enter your password" onpaste="return false" id="loginPass" autocomplete="new-password">
+                    <div class="error-info" id="loginErr">Sorry,Phone or password is incorrect!</div>
+                </div>
+                <button type="submit" class="btn btn-login" id="login" disabled>Login</button>
+                <div class="checkbox">
+                    <a href="javascript:;" id="signUpBtn">Register</a>
+                    <div class="forr-psd">
+                        <a href="javascript:;" id="forgetPass">Forgot Password?</a>
+                    </div>
+                </div>
+            </form>
+
+            <form class="signup-form-1 form clearfix" style="display: none" id="signUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="text" placeholder="Phone Number" id="phone" autocomplete="off">
+                    <div class="error-info" id="phoneErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn" id="get-register-code" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn">Login in</a></p>
+            </form>
+            <form class="signup-form-2 form clearfix" style="display: none">
+                <div class="form-group">
+                    <p class="v-title">Verification code</p>
+                    <!--  <input class="form-control" type="text" required id="code" autocomplete="off"> -->
+                    <div class="verify-plugin clearfix" id="code">
+                        <input type="number" class="mask-input" id="mask-input" autocomplete="off">
+                        <div id="code-1" class="inner-code"></div>
+                        <div id="code-2" class="inner-code"></div>
+                        <div id="code-3" class="inner-code"></div>
+                        <div id="code-4" class="inner-code"></div>
+                    </div>
+                    <div class="error-info" id="codeErr">errinfo</div>
+                </div>
+                <button type="button" class="btn btn-next" id="btn-next" disabled="disabled">Next</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn1">Login in</a></p>
+            </form>
+            <form class="signup-form-3 form clearfix" style="display: none">
+                <div class="form-group sign-3">
+                    <span class="label">Password</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="password" autocomplete="off">
+                    <div class="error-info" id="passwordErr">the phone number format is incorrect!</div>
+                </div>
+                <div class="form-group sign-32">
+                    <span class="label">Password confirmation</span>
+                    <input class="form-control" type="password" placeholder="Set your password" id="confirmPass" autocomplete="off">
+                    <div class="error-info" id="confirmPassErr">the phone number format is incorrect!</div>
+                </div>
+                <button type="button" class="btn btn-next" id="register" disabled="disabled">Done</button>
+                <p class="trans">Already have account?<a href="javascript:;" id="loginBtn2">Login in</a></p>
+            </form>
+            <form class="reset-form form" style="display: none" id="resetUpForm">
+                <div class="form-group">
+                    <span class="label">Phone Number</span>
+                    <input class="form-control" type="number" placeholder="Enter your Phone Number" id="resetPhone" autocomplete="off">
+                    <div class="error-info" id="resetPhoneErr">the phone number format is incorrect!</div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group resetPassword">
+                        <span class="label">Password</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetPassword" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetPasswordErr">the phone number format is incorrect!</div>
+                    </div>
+                    <div class="form-group resetConfirmPass">
+                        <span class="label">Password confirmation</span>
+                        <input class="form-control" type="password" placeholder="Set your password" id="resetConfirmPass" onpaste="return false" autocomplete="new-password">
+                        <div class="error-info" id="resetConfirmPassErr">the phone number format is incorrect!</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="label">SMS Code</span>
+                    <input class="form-control codetext" type="number" placeholder="Set your SMS Code" id="resetCode" autocomplete="off">
+                    <input class="btn getcode" type="button" value="Send" id="resetGetCodeBtn">
+                    <div class="clear"></div>
+                    <div class="error-info" id="resetCodeErr">Phone identifying code format is incorrect!</div>
+                </div>
+                <button type="submit" class="btn" id="reset" disabled="disabled">Done</button>
+                <p class="trans">No account yet?<a href="javascript:;" id="signUpBtn1">Register</a></p>
+
+            </form>
+
+            <div class="reset-success" style="display: none">
+                <h3>Reset password successfully!</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content naver">
+    <div class="mobile-list">
+        <div class="phone">
+            <div class="sign-in-pad">
+                <div class="close-result">✕</div>
+                <img src="images/back/sign.png" class="sign-img">
+                <div>You've got <span class="coinAmount"></span> Nano.</div>
+            </div>
+        </div>
+        <ul>
+            <li id="close_mobile_list"><a href="javascript:"><i class="iconfont icon-left"></i>Back</a></li>
+            <li class="phoneSignUp"><a href="javascript:">Register</a></li>
+            <li class="phoneSinIn"><a href="javascript:" id="phone-login-entry">Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/option">Forecast</a></li>
+            <li class="selected"><a class="" href="/coin">CoinMarket</a></li>
+            <li><a href="/news">News</a></li>
+            <li class="phone sign-in-list">
+                <a class="sign-in">SignIn</a>
+            </li>
+            <li class="phoneLogout" style="display: none"><a href="javascript:">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <div class="phone-display-area">
+                <div class="button-area">
+                    <div class="btn mobile-btn">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="left-logo">
+                <a href="/">
+                    <img src="images/icon/logo.png" class="logo" alt="GBI" title="Global BlockChain Index">
+                </a>
+            </div>
+            <div class="center-nav">
+                <div class="wrapper visible">
+                    <ul class="visible">
+                        <li class="">
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="sp-nav-a" href="/option">Forecast</a>
+                        </li>
+                        <li class="selected">
+                            <a href="/coin">CoinMarket</a>
+                        </li>
+                        <li>
+                            <a href="/news">News</a>
+                        </li>
+                        <li><a href="javascript:" class="login-btn" id="login-entry">Login</a></li>
+                        <li class="right-area">
+                            <a href="javascript:" id="user" style="display: none" title="sign in" alt="sign in">
+                                <i class="iconfont icon-gerenzhongxinxia"></i>
+                                <div class="logout-btn">
+                                    <div class="top"></div>
+                                    <div class="logout" id="logout">logout</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="pc sign-in-list">
+                            <a class="sign-in" href="javascript:">SignIn</a>
+                            <div class="sign-in-pad">
+                                <div class="close-pad">✕</div>
+                                <img src="images/back/sign.png" class="sign-img">
+                                <div>You've got <span class="coinAmount"></span> Nano.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-area">
+                <a href="javascript:" class="btn current">USD</a>
+                <a href="javascript:" class="btn select">
+                    <div class="pre1"></div>
+                    <div class="pre2"></div>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="naver-border-bottom"></div>
+</div>
+
+<div class="gbi-index">
+    <div class="container">
+        <h1>Global BlockChain Index( GBI ) Algorithm</h1>
+        <div class="inde-table-area">
+            <table class="table table-striped table-responsive table1 hidden-xs">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Currency</th>
+                        <th>The Weight</th>
+                        <th>No.</th>
+                        <th>Currency</th>
+                        <th>The Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>BTC</td>
+                        <td>40%</td>
+                        <td>2</td>
+                        <td>ETH</td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>BCH</td>
+                        <td>10%</td>
+                        <td>4</td>
+                        <td>LTC</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>MIOTA</td>
+                        <td>5%</td>
+                        <td>6</td>
+                        <td>DASH</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>XRP</td>
+                        <td>2%</td>
+                        <td>8</td>
+                        <td>XLM</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>XEM</td>
+                        <td>2%</td>
+                        <td>10</td>
+                        <td>XMR</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>EOS</td>
+                        <td>2%</td>
+                        <td>12</td>
+                        <td>ETC</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>NEO</td>
+                        <td>1%</td>
+                        <td>14</td>
+                        <td>QTUM</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>LSK</td>
+                        <td>1%</td>
+                        <td>16</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped visible-xs-table">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Currency</th>
+                    <th>The Weight</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>BTC</td>
+                    <td>40%</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>ETH</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>BCH</td>
+                    <td>10%</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>LTC</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>MIOTA</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>DASH</td>
+                    <td>5%</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>XRP</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>XLM</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>XEM</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>XMR</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>EOS</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>ETC</td>
+                    <td>2%</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>NEO</td>
+                    <td>1%</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>QTUM</td>
+                    <td>1%</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>LSK</td>
+                    <td>1%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="title">
+            <div><img src="images/icon/gbi-index.png"></div>
+            <strong>The Global Blockchain Index (GBI) </strong>
+            <span>is calculated as shown above: </span>
+        </div>
+        <div class="index-info">
+            <p>Pi is the current price of a blockchain asset type in the above table, Vi indicates the current circulation of the blockchain, Ri represents the weight of the blockchain, V0 represents the weighted average market value of the selected blockchain in the base period, 1000 is the base percentage coefficient. The base period market value and weight of the selected blockchain in the base period are shown in the following table and the weighted average market value V0 can be obtained (based on Jan 1st, 2017).</p>
+        </div>
+        <div class="inde-table-area">
+            <table class="table table-striped table-responsive table2 hidden-xs">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Currency</th>
+                        <th>The Weight</th>
+                        <th>Expectation Value</th>
+                        <th>No.</th>
+                        <th>Currency</th>
+                        <th>The Weight</th>
+                        <th>Expectation Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Bitcoin</td>
+                        <td>50%</td>
+                        <td>$15,641,622,845.00</td>
+                        <td>2</td>
+                        <td>Ethereum</td>
+                        <td>24%</td>
+                        <td>$720,735,075.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Litecoin</td>
+                        <td>2%</td>
+                        <td>$228,478,985.00</td>
+                        <td>4</td>
+                        <td>Zcash</td>
+                        <td>2%</td>
+                        <td>$16,994,517.00</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Dash</td>
+                        <td>2%</td>
+                        <td>$78,389,714.00</td>
+                        <td>6</td>
+                        <td>Monero</td>
+                        <td>2%</td>
+                        <td>$187,365,475.00</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>NEM</td>
+                        <td>2%</td>
+                        <td>$30,907,529.00</td>
+                        <td>8</td>
+                        <td>Augur</td>
+                        <td>2%</td>
+                        <td>$42,194,900.00</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>DigixDAO</td>
+                        <td>2%</td>
+                        <td>$18,160,040.00</td>
+                        <td>10</td>
+                        <td>Golem</td>
+                        <td>2%</td>
+                        <td>$6,246,343.00</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Factom</td>
+                        <td>2%</td>
+                        <td>$25,441,581.00</td>
+                        <td>12</td>
+                        <td>MaidSafeCoin</td>
+                        <td>2%</td>
+                        <td>$45,007,740.00</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Siacoin</td>
+                        <td>2%</td>
+                        <td>$5,118,964.00</td>
+                        <td>14</td>
+                        <td>BitShares</td>
+                        <td>2%</td>
+                        <td>$10,154,715.00</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Ethereum Classic</td>
+                        <td>2%</td>
+                        <td>$130,727,252.00</td>
+                        <td>16</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped visible-xs-table">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Currency</th>
+                    <th>The Weight</th>
+                    <th>Expectation Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Bitcoin</td>
+                    <td>50%</td>
+                    <td>$15,641,622,845.00</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ethereum</td>
+                    <td>24%</td>
+                    <td>$720,735,075.00</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Litecoin</td>
+                    <td>2%</td>
+                    <td>$228,478,985.00</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Zcash</td>
+                    <td>2%</td>
+                    <td>$16,994,517.00</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Dash</td>
+                    <td>2%</td>
+                    <td>$78,389,714.00</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Monero</td>
+                    <td>2%</td>
+                    <td>$187,365,475.00</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>NEM</td>
+                    <td>2%</td>
+                    <td>$30,907,529.00</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Augur</td>
+                    <td>2%</td>
+                    <td>$42,194,900.00</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>DigixDAO</td>
+                    <td>2%</td>
+                    <td>$18,160,040.00</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Golem</td>
+                    <td>2%</td>
+                    <td>$6,246,343.00</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Factom</td>
+                    <td>2%</td>
+                    <td>$25,441,581.00</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>MaidSafeCoin</td>
+                    <td>2%</td>
+                    <td>$45,007,740.00</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Siacoin</td>
+                    <td>2%</td>
+                    <td>$5,118,964.00</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>BitShares</td>
+                    <td>2%</td>
+                    <td>$10,154,715.00</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Ethereum Classic</td>
+                    <td>2%</td>
+                    <td>$130,727,252.00</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-up" id="scrollUp">
+    <i class="iconfont icon-shang"></i>
+</div>
+
+<footer>
+    <div class="partners container">
+        <div class="title col-lg-1 col-md-2 col-sm-2">
+            <h3>Partners:</h3>
+        </div>
+        <div class="gbi-partners col-lg-11 col-md-10 col-sm-10">
+            <div class="partners-list">
+                <ul>
+                    <li><a href="https://www.btcnano.org/" target="_blank" title="btcnano"><img src="images/friendsChain/btcnano.png"></a></li>
+                    <li><a href="https://big.one/" target="_blank" title="bigone"><img src="images/friendsChain/bigone.png"></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="copy-right"><div class="container">Copyright ©2018 Foxone.</div></div>
+</footer>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE 9]><script type="text/javascript" src="js/jquery.xdomainrequest.min.js"></script><![endif]-->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/encrypt.min.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript" src="js/allFunction.js?version=2.1.1"></script>
+
+<!--<script type="text/javascript" src="js/loginInput.js"></script>-->
+
+<div class="modal fade in" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 340px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+                </button>
+                <h4 class="modal-title">
+                    Error
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="change-personal-psd" style="overflow: hidden">
+                    <img src="images/mark.png" style="width: 100px;float: left;display: block">
+                    <div style="float: right;margin-top: 31px;width: 152px;" id="content">Sorry, No data available</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location = window.location">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!--alert modal-->
+<div class="modal fade in" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="top: 50%; margin-top: -180px;">
+    <div class="modal-dialog" style="width: 350px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ✕
+                </button>
+                <h4 class="modal-title">
+                    Confirm
+                </h4>
+            </div>
+            <div class="modal-body" style="padding: 35px 30px;font-size: 16px;line-height: 1.8">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="location.href = location.href">
+                    Reload
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius: 4px;width: 72px">
+                    Cancel
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+</html>

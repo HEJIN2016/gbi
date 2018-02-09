@@ -1,0 +1,113 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <title>Global BlockChain Index Website</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="kline/lib/kline.css">
+</head>
+<body>
+<div id="kline_container"></div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!--[if IE 9]><script src="js/jquery.xdomainrequest.min.js"></script><![endif]-->
+<script type="text/javascript" src="kline/lib/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="kline/lib/kline.js?v=0.0.1"></script>
+<!--<script type="text/javascript" src="js/coin.js"></script>-->
+<script type="text/javascript">
+    //专业版k线绘制
+    var CONFIG = {
+        URL: '/'
+    };
+
+    //获取url参数
+    function queryParams(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+            return  decodeURI(r[2]);
+        return null;
+    }
+    var kline;
+    var goto_exchange = queryParams('exchange');
+    var select_coin = queryParams('coin');
+    var gapTime = 0;
+
+    function drawKline(exchange,coin) {
+        $(".chart_toolbar_tabgroup li a").removeClass('selected');
+        $(".chart_str_period_15m").addClass('selected');
+        var space_time = 10;
+        var period = '';
+        var defaultSet = {
+            exchange: exchange,
+            currency: coin,
+            time: (new Date().getTime() - 86400000 * space_time)/1000,
+            period: '15mins'
+        };
+
+        var defaultParams = $.param(defaultSet);
+        var url = CONFIG.URL + 'k2/?' + defaultParams;
+        chart = null;
+        chart = new Kline({
+            element: "#kline_container",
+            width: document.body.clientWidth,
+            height: document.body.clientHeight,
+            theme: 'dark', // light/dark
+            language: 'en-us', // zh-cn/en-us/zh-tw
+            ranges: ["1w", "1d", "1h", "30m", "15m", "5m", "1m", "line"],
+            symbol: "coin5/coin4",
+            symbolName: "COIN5_COIN4",
+            type: "poll", // poll/socket
+            limit: 1000,
+            intervalTime: 10000,
+//				reverseColor: true,
+            debug: false,
+            showTrade: false,
+            url: url,
+            onResize: function (width, height) {
+                console.log("chart resized: " + width + " " + height);
+            },
+            onRangeChange: function (range) {
+                console.log(range);
+                chart.pause();
+                if (range == 604800000) {
+                    space_time = 200 * 7;
+                    period = 'week';
+                } else if(range == 86400000){
+                    space_time = 200;
+                    period = 'day';
+                } else if(range == 3600000){
+                    period = 'hour';
+                } else if(range == 1800000){
+                    period = '30mins';
+                } else if(range == 900000){
+                    period = '15mins';
+                } else if (range == 300000) {
+                    period = '5mins';
+                } else if(range == 60000){
+                    period = 'min';
+                }
+                var obj = {
+                    exchange: exchange,
+                    currency: coin,
+                    time: (new Date().getTime() - 86400000 * space_time)/1000,
+                    period: period
+                };
+                console.log(obj);
+                var params = $.param(obj);
+                chart.url = CONFIG.URL + 'k2/?' + params;
+                chart.resend();
+            }
+        });
+        chart.draw();
+    }
+
+    $(window).resize(function() {
+        chart.resize(document.body.clientWidth, document.body.clientHeight);
+    });
+    drawKline(goto_exchange,select_coin);
+</script>
+
+</body>
+</html>
